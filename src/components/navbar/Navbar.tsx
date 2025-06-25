@@ -4,8 +4,6 @@ import React, {useState} from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {FaSearch} from "react-icons/fa";
-import {Drawer, DrawerContent, DrawerTrigger} from "@/components/ui/drawer";
-import {Menu} from "lucide-react";
 
 const images: string[] = [
     "/images/home-page/banner/banner.png",
@@ -26,7 +24,8 @@ const Navbar: React.FC = () => {
     return (
         <div className="w-full mx-auto relative">
             {/* --- Overlay Search/Logo/Buttons --- */}
-            <div className="absolute z-50 top-10 w-full px-4">
+            {/*large device */}
+            <div className="absolute z-50 lg:block hidden top-10 w-full px-4">
                 <div className="font-poppins max-w-7xl mx-auto rounded-lg p-3">
                     <div className="flex items-center justify-between gap-4 flex-wrap">
                         {/* --- Logo --- */}
@@ -41,7 +40,7 @@ const Navbar: React.FC = () => {
                         </Link>
 
                         {/* --- Desktop Search --- */}
-                        <div className="hidden lg:flex items-center gap-4 flex-1 justify-center">
+                        <div className="flex items-center gap-4 flex-1 justify-center">
                             <div className="w-full flex flex-row rounded-full items-center bg-gray-300 px-1 py-1">
                                 <input
                                     type="text"
@@ -57,57 +56,25 @@ const Navbar: React.FC = () => {
                                 <button
                                     className="flex cursor-pointer items-center gap-2 btnColor text-white py-3 px-7 lg:text-lg text-sm rounded-[35px]">
                                     <FaSearch/>
-                                    <span className="hidden md:inline">Search</span>
+                                    <span className=" md:inline">Search</span>
                                 </button>
                             </div>
                         </div>
 
                         {/* --- Sign In Button --- */}
-                        <div className="hidden lg:block">
+                        <div className="">
                             <button className="btnColor cursor-pointer text-white py-4 lg:text-lg px-7 rounded-[35px]">
                                 Sign in to your account
                             </button>
                         </div>
 
-                        {/* --- Mobile Drawer --- */}
-                        <div className="lg:hidden">
-                            <Drawer direction="left">
-                                <DrawerTrigger asChild>
-                                    <button>
-                                        <Menu className="w-6 h-6"/>
-                                    </button>
-                                </DrawerTrigger>
-                                <DrawerContent
-                                    side="left"
-                                    className="p-4 w-[300px] space-y-4 bg-white border-r border-gray-200"
-                                >
-                                    <input
-                                        type="text"
-                                        placeholder="Search services"
-                                        className="w-full px-4 py-2 border border-gray-300 rounded-md"
-                                    />
-                                    <input
-                                        type="text"
-                                        placeholder="Enter location"
-                                        className="w-full px-4 py-2 border border-gray-300 rounded-md"
-                                    />
-                                    <button
-                                        className="flex items-center justify-center gap-2 btnColor text-white w-full py-2 rounded-md">
-                                        <FaSearch/>
-                                        <span>Search</span>
-                                    </button>
-                                    <button className="btnColor cursor-pointer text-white w-full py-2 rounded-md">
-                                        Sign in to your account
-                                    </button>
-                                </DrawerContent>
-                            </Drawer>
-                        </div>
+
                     </div>
                 </div>
             </div>
 
             {/* --- Banner Section --- */}
-            <div className="relative w-full sm:h-80 md:h-[637px] h-auto overflow-hidden">
+            <div className="relative w-full h-[80vh] hidden lg:block  overflow-hidden">
                 <Image
                     src={images[current]}
                     alt={`Slide ${current + 1}`}
@@ -144,6 +111,77 @@ const Navbar: React.FC = () => {
                     </svg>
                 </button>
             </div>
+
+
+            {/*small device */}
+
+            <div className="lg:hidden block">
+                {/* Slider Section */}
+                <div className="relative w-full h-[300px] overflow-hidden">
+                    <Image
+                        src={images[current]}
+                        alt={`Slide ${current + 1}`}
+                        fill
+                        className="object-cover"
+                        priority
+                    />
+
+                    {/* Search Box Positioned at Center */}
+                    <div className="absolute flex flex-col inset-0 space-y-4 items-center justify-center px-4">
+                        {/* Input 1 */}
+                        <input
+                            type="text"
+                            placeholder="Search services"
+                            className="w-[85%] max-w-sm py-2 rounded-full border  outline-none text-sm px-4 mx-auto bg-white bg-opacity-80"
+                        />
+
+                        {/* Input 2 */}
+                        <input
+                            type="text"
+                            placeholder="Search location"
+                            className="w-[85%] max-w-sm py-2 rounded-full border  outline-none text-sm px-4 mx-auto bg-white bg-opacity-80"
+                        />
+
+                        {/* Buttons */}
+                        <div className="text-white text-sm flex flex-col gap-3">
+                            <button className="btnColor py-2 px-6 rounded-full">
+                                Search
+                            </button>
+                            <button className="btnColor py-2 px-6 rounded-full">
+                                Sign in to your account
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* --- Prev Button --- */}
+                    <button
+                        onClick={prevSlide}
+                        aria-label="Previous Slide"
+                        className="absolute z-50 top-1/2 cursor-pointer left-3 -translate-y-1/2 bg-white bg-opacity-80 text-black flex justify-center items-center w-6 h-6 rounded-full hover:bg-opacity-90 transition"
+                    >
+                        <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="64" height="64" rx="32" transform="matrix(-1 0 0 1 64 0)" fill="white" fill-opacity="0.6"/>
+                            <path d="M38 38.2854V25.7146C38 25.3704 37.8815 25.0818 37.6444 24.8486C37.4074 24.6154 37.1309 24.4992 36.8148 24.5C36.7161 24.5 36.6121 24.515 36.5031 24.5449C36.3941 24.5749 36.2906 24.6207 36.1926 24.6822L26.5333 30.9676C26.3556 31.0891 26.222 31.2409 26.1328 31.4231C26.0435 31.6053 25.9992 31.7976 26 32C26.0008 32.2024 26.045 32.3947 26.1328 32.5769C26.2205 32.7591 26.354 32.9109 26.5333 33.0324L36.1926 39.3178C36.2914 39.3785 36.3949 39.4243 36.5031 39.455C36.6114 39.4858 36.7153 39.5008 36.8148 39.5C37.1309 39.5 37.4074 39.3834 37.6444 39.1502C37.8815 38.917 38 38.6287 38 38.2854Z" fill="black"/>
+                        </svg>
+
+                    </button>
+
+                    {/* --- Next Button --- */}
+                    <button
+                        onClick={nextSlide}
+                        aria-label="Next Slide"
+                        className="absolute z-50 top-1/2 right-3 -translate-y-1/2 bg-white bg-opacity-80 text-black flex justify-center items-center w-6 h-6 rounded-full hover:bg-opacity-90 transition"
+                    >
+                        <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="64" height="64" rx="32" transform="matrix(-1 0 0 1 64 0)" fill="white" fill-opacity="0.6"/>
+                            <path d="M38 38.2854V25.7146C38 25.3704 37.8815 25.0818 37.6444 24.8486C37.4074 24.6154 37.1309 24.4992 36.8148 24.5C36.7161 24.5 36.6121 24.515 36.5031 24.5449C36.3941 24.5749 36.2906 24.6207 36.1926 24.6822L26.5333 30.9676C26.3556 31.0891 26.222 31.2409 26.1328 31.4231C26.0435 31.6053 25.9992 31.7976 26 32C26.0008 32.2024 26.045 32.3947 26.1328 32.5769C26.2205 32.7591 26.354 32.9109 26.5333 33.0324L36.1926 39.3178C36.2914 39.3785 36.3949 39.4243 36.5031 39.455C36.6114 39.4858 36.7153 39.5008 36.8148 39.5C37.1309 39.5 37.4074 39.3834 37.6444 39.1502C37.8815 38.917 38 38.6287 38 38.2854Z" fill="black"/>
+                        </svg>
+
+                    </button>
+                </div>
+            </div>
+
+
         </div>
     );
 };
