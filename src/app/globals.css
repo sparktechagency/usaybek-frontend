@@ -134,29 +134,50 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
+/* Hide swiper default arrows */
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  display: none !important;
+}
+
+/* Style navigation buttons */
+.swiper-button-next,
+.swiper-button-prev {
+  width: 36px !important;       /* Smaller width */
+  height: 36px !important;      /* Smaller height */
+  padding: 0 !important;        /* Remove default padding */
+  background: white !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  margin-top: 20px;
+}
+
+
+
+.swiper-button-next > svg,
+.swiper-button-prev > svg {
+  width: 16px !important;    /* Icon width */
+  height: 16px !important;   /* Icon height */
+  display: block;
+  color: black;
+}
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+button.swiper-button-next.absolute.right-0.top-1\/2.-translate-y-1\/2 {
+  margin-top: 0px!important;
+}
+button.swiper-button-prev.absolute.right-0.top-1\/2.-translate-y-1\/2 {
+  margin-top: 0px!important;
+}
+button.swiper-button-prev.absolute.left-0.top-1\/2.mt-20.-translate-y-1\/2 {
+  margin-top: 0px;
+}
 
 
 
